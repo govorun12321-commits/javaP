@@ -1,7 +1,3 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-
 /*
  * Задание 8. Первый тест по AAA
  *
@@ -33,17 +29,19 @@ import org.junit.jupiter.api.Test;
  *  Имя теста: метод_условие_результат. Блоки Arrange / Act / Assert разделены комментариями.
  *  Одна причина падения: проверяется только completedHours (остальное — отдельные тесты).
  */
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 class Task08_FirstAaaTest {
 
     @Test
     void completeHours_hoursWithinRemaining_increasesCompletedHours() {
-        // Arrange
         Course course = new Course(10, "Java Fundamentals", 32);
 
-        // Act
         course.completeHours(6);
 
-        // Assert
         assertEquals(6, course.completedHours());
     }
 }
