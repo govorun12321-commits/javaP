@@ -19,17 +19,17 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
-            
         </dependency>
     </dependencies>
 
-        <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>3.5.0</version>
                 <executions>
+                    <!-- корень как main-source -->
                     <execution>
                         <id>add-source</id>
                         <phase>generate-sources</phase>
@@ -38,7 +38,21 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>.</source>
+                                <source>${project.basedir}</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+
+                    <!-- корень как test-source: сюда попадут Task*Test -->
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -49,6 +63,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
+                <configuration>
+                    <includes>
+                        <include>**/Task*Test.java</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
